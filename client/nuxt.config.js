@@ -45,8 +45,35 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ["@nuxtjs/axios", "@nuxtjs/auth-next"],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {},
+
+  axios: {
+    baseURL: "http://localhost:8000/api"
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: "login",
+            method: "post",
+            propertyName: "meta.token"
+          },
+          user: {
+            url: "user",
+            method: "get",
+            propertyName: "data"
+          },
+          logout: {
+            url: "logout",
+            method: "post"
+          }
+        }
+      }
+    }
+  }
 };
